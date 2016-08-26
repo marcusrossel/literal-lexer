@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD54B4A21D7073E30030013E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4A11D7073E30030013E /* main.swift */; };
+		DD54B4AC1D7073FF0030013E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4A81D7073FF0030013E /* Extensions.swift */; };
+		DD54B4AD1D7073FF0030013E /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4A91D7073FF0030013E /* Generic Lexer.swift */; };
+		DD54B4AE1D7073FF0030013E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4AA1D7073FF0030013E /* main.swift */; };
+		DD54B4AF1D7073FF0030013E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4AB1D7073FF0030013E /* Token.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +27,10 @@
 
 /* Begin PBXFileReference section */
 		DD54B49E1D7073E30030013E /* Literal Lexer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Literal Lexer"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD54B4A11D7073E30030013E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DD54B4A81D7073FF0030013E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../Extensions.swift; sourceTree = "<group>"; };
+		DD54B4A91D7073FF0030013E /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Generic Lexer.swift"; path = "../Generic Lexer.swift"; sourceTree = "<group>"; };
+		DD54B4AA1D7073FF0030013E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = ../main.swift; sourceTree = "<group>"; };
+		DD54B4AB1D7073FF0030013E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = ../Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +63,20 @@
 		DD54B4A01D7073E30030013E /* Literal Lexer */ = {
 			isa = PBXGroup;
 			children = (
-				DD54B4A11D7073E30030013E /* main.swift */,
+				DD54B4B01D7074090030013E /* GenericLexer */,
+				DD54B4A81D7073FF0030013E /* Extensions.swift */,
+				DD54B4AA1D7073FF0030013E /* main.swift */,
+				DD54B4AB1D7073FF0030013E /* Token.swift */,
 			);
 			path = "Literal Lexer";
+			sourceTree = "<group>";
+		};
+		DD54B4B01D7074090030013E /* GenericLexer */ = {
+			isa = PBXGroup;
+			children = (
+				DD54B4A91D7073FF0030013E /* Generic Lexer.swift */,
+			);
+			name = GenericLexer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -96,6 +113,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8YSJ38HAEZ;
 						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -122,7 +140,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD54B4A21D7073E30030013E /* main.swift in Sources */,
+				DD54B4AC1D7073FF0030013E /* Extensions.swift in Sources */,
+				DD54B4AD1D7073FF0030013E /* Generic Lexer.swift in Sources */,
+				DD54B4AE1D7073FF0030013E /* main.swift in Sources */,
+				DD54B4AF1D7073FF0030013E /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,14 +237,21 @@
 		DD54B4A61D7073E30030013E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		DD54B4A71D7073E30030013E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
