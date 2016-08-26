@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD54B4AC1D7073FF0030013E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4A81D7073FF0030013E /* Extensions.swift */; };
-		DD54B4AD1D7073FF0030013E /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4A91D7073FF0030013E /* Generic Lexer.swift */; };
-		DD54B4AE1D7073FF0030013E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4AA1D7073FF0030013E /* main.swift */; };
-		DD54B4AF1D7073FF0030013E /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD54B4AB1D7073FF0030013E /* Token.swift */; };
+		DDD1BD631D7076C6005B1A98 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */; };
+		DDD1BD641D7076C6005B1A98 /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */; };
+		DDD1BD651D7076C6005B1A98 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD611D7076C6005B1A98 /* main.swift */; };
+		DDD1BD661D7076C6005B1A98 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD621D7076C6005B1A98 /* Token.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,10 +27,10 @@
 
 /* Begin PBXFileReference section */
 		DD54B49E1D7073E30030013E /* Literal Lexer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Literal Lexer"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD54B4A81D7073FF0030013E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../Extensions.swift; sourceTree = "<group>"; };
-		DD54B4A91D7073FF0030013E /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Generic Lexer.swift"; path = "../Generic Lexer.swift"; sourceTree = "<group>"; };
-		DD54B4AA1D7073FF0030013E /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = ../main.swift; sourceTree = "<group>"; };
-		DD54B4AB1D7073FF0030013E /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = ../Token.swift; sourceTree = "<group>"; };
+		DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Generic Lexer.swift"; sourceTree = "<group>"; };
+		DDD1BD611D7076C6005B1A98 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		DDD1BD621D7076C6005B1A98 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,20 +63,20 @@
 		DD54B4A01D7073E30030013E /* Literal Lexer */ = {
 			isa = PBXGroup;
 			children = (
-				DD54B4B01D7074090030013E /* GenericLexer */,
-				DD54B4A81D7073FF0030013E /* Extensions.swift */,
-				DD54B4AA1D7073FF0030013E /* main.swift */,
-				DD54B4AB1D7073FF0030013E /* Token.swift */,
+				DDD1BD671D7076CF005B1A98 /* Generic Lexer */,
+				DDD1BD611D7076C6005B1A98 /* main.swift */,
+				DDD1BD621D7076C6005B1A98 /* Token.swift */,
+				DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */,
 			);
 			path = "Literal Lexer";
 			sourceTree = "<group>";
 		};
-		DD54B4B01D7074090030013E /* GenericLexer */ = {
+		DDD1BD671D7076CF005B1A98 /* Generic Lexer */ = {
 			isa = PBXGroup;
 			children = (
-				DD54B4A91D7073FF0030013E /* Generic Lexer.swift */,
+				DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */,
 			);
-			name = GenericLexer;
+			name = "Generic Lexer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,10 +140,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD54B4AC1D7073FF0030013E /* Extensions.swift in Sources */,
-				DD54B4AD1D7073FF0030013E /* Generic Lexer.swift in Sources */,
-				DD54B4AE1D7073FF0030013E /* main.swift in Sources */,
-				DD54B4AF1D7073FF0030013E /* Token.swift in Sources */,
+				DDD1BD631D7076C6005B1A98 /* Extensions.swift in Sources */,
+				DDD1BD641D7076C6005B1A98 /* Generic Lexer.swift in Sources */,
+				DDD1BD651D7076C6005B1A98 /* main.swift in Sources */,
+				DDD1BD661D7076C6005B1A98 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +274,7 @@
 				DD54B4A71D7073E30030013E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
