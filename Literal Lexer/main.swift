@@ -17,6 +17,7 @@ lexer.tokenTransforms = [
   TokenTransform.forNewLines,
   TokenTransform.forComments,
   TokenTransform.forBooleans,
+  TokenTransform.forFloatingPoints,
   TokenTransform.forIntegers,
 ]
 
@@ -40,6 +41,7 @@ let domains: Set = [
   "NEW_LINE",
   "COMMENT",
   "BOOL",
+  "FLOAT",
   "INT",
 ]
 
@@ -89,14 +91,30 @@ if domains.contains("BOOL") {
   )
 }
 
+if domains.contains("FLOAT") {
+  test(message: "FLOAT", texts:
+    "3.1415926535897",
+    "-2.718281828",
+    "4_123.123_11_",
+    "3_.14", // shouldn't work if poosible
+    "7_._00", // shouldn't work if poosible
+    ".123",
+    "123."
+  )
+}
+
+
 if domains.contains("INT") {
   test(message: "INT", texts:
     "123_22__",
-    "0_125"   ,
+    "-0_125"  ,
     "0b110"   ,
-    "0b125"   ,
+    "-0b125"  ,
     "0o125"   ,
     "0x125"   ,
-    "0o911"
+    "-0o123"  ,
+    "0o911"   ,
+    "-_231"   ,
+    "-_012"
   )
 }
