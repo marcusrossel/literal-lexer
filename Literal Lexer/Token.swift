@@ -24,14 +24,13 @@ enum Token {
   case undefined(Character)
 }
 
-/// A namespace for all of the token transforms used in `Lexer.nextToken()`.
+/// A namespace for all of the token transforms.
 ///
-/// All of the methods are of the form:
-/// `(buffer: inout Character) -> Token?`
+/// All of the methods are of the form: `Lexer.PossibleTransform`.
 ///
 /// The parameter `buffer` is the current relevant character and is passed in by
-/// `Lexer.nextToken()`.
-/// When the function returns `buffer` should be set to the next relevant
+/// `lexer.nextToken()`.
+/// When the function returns, `buffer` should be set to the next relevant
 /// character.
 enum TokenTransform {
   /// Detects and ignores consecutive whitespaces.
@@ -144,6 +143,9 @@ enum TokenTransform {
   /// - Returns: A `.floatingPoint` token if a floating-point literal was
   /// detected, otherwise `nil`.
   static func forFloatingPoints(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+    // A backup of the current state of `buffer` and `lexer.position`, which can
+    // be restored, incase the characters turn out not to form a floating-point
+    // literal.
     let backup = (buffer: buffer, position: lexer.position)
 
     guard let floatingPointIsNegative = numberIsNegative(buffer: &buffer, lexer: lexer) else {
@@ -181,7 +183,7 @@ enum TokenTransform {
     // wrong with the lexing process.
     guard let floatingPointValue = Double(trimmedBuffer) else {
       fatalError("Lexer Error: Was not able to convert `String`(" +
-        floatingPointBuffer + ") to `Double`.")
+        floatingPointBuffer + ") to `Double`.\n")
     }
 
     return .floatingPoint(floatingPointValue)
@@ -240,7 +242,7 @@ enum TokenTransform {
     // wrong with the lexing process.
     guard let integerValue = Int(trimmedBuffer, radix: radix) else {
       fatalError("Lexer Error: Was not able to convert `String`(" +
-        integerBuffer + ") to `Int`.")
+        integerBuffer + ") to `Int`.\n")
     }
     
     return .integer(integerValue)
@@ -259,18 +261,35 @@ enum TokenTransform {
   /// the given character sequence.
   private static func numberIsNegative(buffer: inout Character, lexer: Lexer<Token>) -> Bool? {
     let numberIsNegative = buffer == "-"
+    let testBuffer = numberIsNegative ? lexer.nextCharacter(peek: true) : buffer
 
-    if numberIsNegative {
-      guard lexer.nextCharacter(peek: true).isPart(of: .decimalDigits) else {
-        return nil
-      }
-      buffer = lexer.nextCharacter()
-    } else {
-      guard buffer.isPart(of: .decimalDigits) else {
-        return nil
-      }
-    }
+    guard testBuffer.isPart(of: .decimalDigits) else { return nil }
+    if numberIsNegative { buffer = lexer.nextCharacter() }
 
     return numberIsNegative
+  }
+
+  /// Detects character literals.
+  ///
+  /// - Note: Characters are delimited with single-quotes.
+  ///
+  /// - Returns: A `.character` token if a character literal was detected,
+  /// otherwise `nil`.
+  static func forCharacters(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+    guard buffer == "'" else { return nil }
+    buffer = lexer.nextCharacter()
+
+    guard buffer != "'" else {
+      fatalError("Lexer Error: Expected a character between two `'`.\n")
+    }
+    let character = buffer
+    buffer = lexer.nextCharacter()
+
+    guard buffer == "'" else {
+      fatalError("Lexer Error: Expected only one character between two `'`.\n")
+    }
+    buffer = lexer.nextCharacter()
+
+    return .character(character)
   }
 }

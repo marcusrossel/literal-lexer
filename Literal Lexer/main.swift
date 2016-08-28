@@ -19,6 +19,7 @@ lexer.tokenTransforms = [
   TokenTransform.forBooleans,
   TokenTransform.forFloatingPoints,
   TokenTransform.forIntegers,
+  TokenTransform.forCharacters,
 ]
 
 func test(message: String, reset: Bool = true, texts: String...) {
@@ -43,6 +44,7 @@ let domains: Set = [
   "BOOL",
   "FLOAT",
   "INT",
+  "CHAR",
 ]
 
 if domains.contains("SPACE") {
@@ -96,8 +98,8 @@ if domains.contains("FLOAT") {
     "3.1415926535897",
     "-2.718281828",
     "4_123.123_11_",
-    "3_.14", // shouldn't work if poosible
-    "7_._00", // shouldn't work if poosible
+    "3_.14", // shouldn't work if possible
+    "7_._00", // shouldn't work if possible
     ".123",
     "123."
   )
@@ -116,5 +118,14 @@ if domains.contains("INT") {
     "0o911"   ,
     "-_231"   ,
     "-_012"
+  )
+}
+
+if domains.contains("CHAR") {
+  test(message: "INT", texts:
+    "'a'",
+    " 'b'",
+    "'c' ",
+    "'h''e''l''l''o''.'"
   )
 }
