@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// The literals that can be lexed by the `literalLexer` 
+/// The literals that can be lexed by the `literalLexer`. 
 enum Token {
   case endOfFile
   case newLine
@@ -87,10 +87,7 @@ enum TokenTransform {
         commentBuffer.append(buffer)
         buffer = lexer.nextCharacter()
       }
-    }
-
-    // Handles closed comments.
-    if lexer.nextCharacter(peek: true) == "*" {
+    } /* Handles closed comments. */ else if lexer.nextCharacter(peek: true) == "*" {
       // Sets `buffer` to the first character after the `*`.
       buffer = lexer.nextCharacter(stride: 2)
 
@@ -106,9 +103,11 @@ enum TokenTransform {
       // Removes the last two characters (`*/`) from the `commentBuffer`.
       let index = commentBuffer.index(commentBuffer.endIndex, offsetBy: -2)
       commentBuffer = commentBuffer.substring(to: index)
+    } /* Handels the case that it's not actually a comment. */ else {
+      return nil
     }
 
-    return commentBuffer.isEmpty ? nil : .comment(commentBuffer)
+    return .comment(commentBuffer)
   }
 
   /// Detects boolean literals (`true` or `false`).
@@ -269,6 +268,20 @@ enum TokenTransform {
     return numberIsNegative
   }
 
+  /*UNFINISHED-START*/
+  static func forNumbers(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+    // Determines if the number is negative, and if the first character after
+    // the sign-character even qualifies for a number.
+    let numberIsNegative = buffer == "-"
+    let testBuffer = numberIsNegative ? lexer.nextCharacter(peek: true) : buffer
+
+    guard testBuffer.isPart(of: .decimalDigits) else { return nil }
+    if numberIsNegative { buffer = lexer.nextCharacter() }
+
+
+  }
+  /*UNFINISHED-END*/
+
   /// Detects character literals.
   ///
   /// - Note: Characters are delimited with single-quotes.
@@ -291,5 +304,52 @@ enum TokenTransform {
     buffer = lexer.nextCharacter()
 
     return .character(character)
+  }
+
+  /// Detects uninterpolated string literals.
+  ///
+  /// - Note: Strings are delimited with double-quotes.
+  ///
+  /// - Returns: An `.uninterpolatedString` token if such a string literal was
+  /// detected, otherwise `nil`.
+  static func forUninterpolatedStrings(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+    guard buffer == "\"" else { return nil }
+    buffer = lexer.nextCharacter()
+
+    var stringBuffer = ""
+
+    while buffer != "\"" {
+      guard buffer != lexer.endOfFile else {
+        fatalError("Lexer Error: Expected closing `\"`.\n")
+      }
+      stringBuffer.append(buffer)
+      buffer = lexer.nextCharacter()
+    }
+
+    buffer = lexer.nextCharacter()
+
+    return .uninterpolatedString(stringBuffer)
+  }
+
+  /// Detects flag literals.
+  ///
+  /// - Note: Flags are identifiers (any combination of alphanumeric characters
+  /// starting with a letter) prefixed by a `-`.
+  ///
+  /// - Returns: A `.flag` token if a flag literal was detected, otherwise
+  /// `nil`.
+  static func forFlags(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+    guard buffer == "-" else { return nil }
+    guard lexer.nextCharacter(peek: true).isPart(of: .letters) else { return nil }
+    buffer = lexer.nextCharacter()
+
+    var flagBuffer = ""
+
+    repeat {
+      flagBuffer.append(buffer)
+      buffer = lexer.nextCharacter()
+    } while buffer.isPart(of: .alphanumerics)
+
+    return .flag(flagBuffer)
   }
 }

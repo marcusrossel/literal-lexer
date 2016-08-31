@@ -20,6 +20,8 @@ lexer.tokenTransforms = [
   TokenTransform.forFloatingPoints,
   TokenTransform.forIntegers,
   TokenTransform.forCharacters,
+  TokenTransform.forUninterpolatedStrings,
+  TokenTransform.forFlags,
 ]
 
 func test(message: String, reset: Bool = true, texts: String...) {
@@ -37,14 +39,16 @@ func test(message: String, reset: Bool = true, texts: String...) {
 }
 
 let domains: Set = [
-  "SPACE",
+  "SPACE"    ,
   "UNDEFINED",
-  "NEW_LINE",
-  "COMMENT",
-  "BOOL",
-  "FLOAT",
-  "INT",
-  "CHAR",
+  "NEW_LINE" ,
+  "COMMENT"  ,
+  "BOOL"     ,
+  "FLOAT"    ,
+  "INT"      ,
+  "CHAR"     ,
+  "STRING"   ,
+  "FLAG"
 ]
 
 if domains.contains("SPACE") {
@@ -74,21 +78,22 @@ if domains.contains("NEW_LINE") {
 
 if domains.contains("COMMENT") {
   test(message: "COMMENT", texts:
-    " a//abc\n ",
-    " a b/*Hello world.*/\nc"
+    " a//abc\n "             ,
+    " a b/*Hello world.*/\nc",
+    "/**//*Hello world.*/\nc"
   )
 }
 
 if domains.contains("BOOL") {
   test(message: "BOOL", texts:
-    "true",
-    "false",
+    "true"      ,
+    "false"     ,
     "true false",
     "false true",
-    "falsetrue",
-    "\nfalse",
-    "true\n",
-    "falstrue",
+    "falsetrue" ,
+    "\nfalse"   ,
+    "true\n"    ,
+    "falstrue"  ,
     "trufalse"
   )
 }
@@ -96,11 +101,11 @@ if domains.contains("BOOL") {
 if domains.contains("FLOAT") {
   test(message: "FLOAT", texts:
     "3.1415926535897",
-    "-2.718281828",
-    "4_123.123_11_",
-    "3_.14", // shouldn't work if possible
-    "7_._00", // shouldn't work if possible
-    ".123",
+    "-2.718281828"   ,
+    "4_123.123_11_"  ,
+    "3_.14"          , // shouldn't work if possible
+    "7_._00"         , // shouldn't work if possible
+    ".123"           ,
     "123."
   )
 }
@@ -122,10 +127,35 @@ if domains.contains("INT") {
 }
 
 if domains.contains("CHAR") {
-  test(message: "INT", texts:
-    "'a'",
-    " 'b'",
-    "'c' ",
+  test(message: "CHAR", texts:
+    "'a'"               ,
+    " 'b'"              ,
+    "'c' "              ,
     "'h''e''l''l''o''.'"
+  )
+}
+
+if domains.contains("STRING") {
+  test(message: "STRING", texts:
+    " \"\" "           ,
+    "\"\" "            ,
+    " \"\""            ,
+    "\"hello, world.\"",
+    "a\"some\"b"       ,
+    "\"\"_\"\""
+  )
+}
+
+if domains.contains("FLAG") {
+  test(message: "FLAG", texts:
+    "-f"                ,
+    "-flag"             ,
+    " -flag"            ,
+    "-flag "            ,
+    " -flag"            ,
+    "a-flag"            ,
+    "-flag b"           ,
+    "-numer1cFl4g"      ,
+    "-123.3 -flaggyFlag"
   )
 }
