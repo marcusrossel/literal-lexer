@@ -8,7 +8,14 @@
 
 import Foundation
 
-/// The literals that can be lexed by the `literalLexer`. 
+// Helper method.
+internal extension Character {
+  func isPart(of set: CharacterSet) -> Bool {
+    return String(self).rangeOfCharacter(from: set) != nil
+  }
+}
+
+/// The literals that can be lexed by the "Literal Lexer". 
 enum Token {
   case endOfFile
   case newLine
@@ -341,138 +348,3 @@ enum TokenTransform {
     return .flag(flagBuffer)
   }
 }
-
-/* DEPRECATED TRANSFORMS
-extension TokenTransform {
-   /// Detects floating-point literals.
-   ///
-   /// - Returns: A `.floatingPoint` token if a floating-point literal was
-   /// detected, otherwise `nil`.
-   static func forFloatingPoints(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
-   // A backup of the current state of `buffer` and `lexer.position`, which can
-   // be restored, incase the characters turn out not to form a floating-point
-   // literal.
-   let backup = (buffer: buffer, position: lexer.position)
-
-   guard let floatingPointIsNegative = numberIsNegative(buffer: &buffer, lexer: lexer) else {
-   return nil
-   }
-
-   var floatingPointBuffer = floatingPointIsNegative ? "-" : ""
-
-   // Gets all of the characters that belong to the literal and stores them in
-   // `floatingPointBuffer`.
-   repeat {
-   floatingPointBuffer.append(buffer)
-   buffer = lexer.nextCharacter()
-   } while buffer.isPart(of: .decimalDigits) ||
-   buffer == "_" ||
-   (buffer == "." && !floatingPointBuffer.contains("."))
-
-   // Makes sure that the `floatingPointBuffer` actually contains a decimal
-   // point (otherwise it should be lexed as an integer) and that it's not the
-   // last character.
-   // It can't be the first one anyway, as `numberIsNegative` doesn't allow
-   // that.
-   guard
-   floatingPointBuffer.contains("."),
-   floatingPointBuffer.characters.last != "."
-   else {
-   buffer = backup.buffer
-   lexer.position = backup.position
-   return nil
-   }
-
-   // Removes underscores from the floating-point literal.
-   let trimmedBuffer = floatingPointBuffer.replacingOccurrences(of: "_", with: "")
-   // Tries to convert the literal to a double. If this fails, something is
-   // wrong with the lexing process.
-   guard let floatingPointValue = Double(trimmedBuffer) else {
-   fatalError("Lexer Error: Was not able to convert `String`(" +
-   floatingPointBuffer + ") to `Double`.\n")
-   }
-
-   return .floatingPoint(floatingPointValue)
-   }
-
-   /// Detects binary, octal, decimal and hexadecimal integer literals.
-   /// The different types are denoted by prefixes:
-   /// * binary: `0b`
-   /// * octal: `0o`
-   /// * decimal: no prefix
-   /// * hexadecimal: `0h`
-   ///
-   /// - Returns: An `.integer` token if an integer literal was detected,
-   /// otherwise `nil`.
-   static func forIntegers(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
-   guard let integerIsNegative = numberIsNegative(buffer: &buffer, lexer: lexer) else {
-   return nil
-   }
-
-   // Assumes that the integer literal will be decimal.
-   var validCharacters = "01234567890_"
-   var radix = 10
-
-   // Adjusts `validCharacters` and `radix` incase of binary, octal and
-   // hexadecimal integer literals.
-   nonDecimals: do {
-   let peekBuffer = lexer.nextCharacter(peek: true)
-   if buffer == "0" && peekBuffer.isPart(of: .letters) {
-   switch peekBuffer {
-   case "b": validCharacters = "01_"; radix = 2
-   case "o": validCharacters = "01234567_"; radix = 8
-   case "x": validCharacters = "0123456789abcdefABCDEF_"; radix = 16
-   default: break nonDecimals
-   }
-
-   // Only if the first character after `0b`, `0o` or `0x` is valid, the
-   // integer literal can be valid.
-   let postPrefix = String(lexer.nextCharacter(peek: true, stride: 2))
-   guard validCharacters.contains(postPrefix) else { break nonDecimals }
-   buffer = lexer.nextCharacter(stride: 2)
-   }
-   }
-
-   var integerBuffer = integerIsNegative ? "-" : ""
-
-   // Gets all of the characters that belong to the literal and stores them in
-   // `integerBuffer`.
-   repeat {
-   integerBuffer.append(buffer)
-   buffer = lexer.nextCharacter()
-   } while validCharacters.contains(String(buffer))
-
-   // Removes underscores from the integer literal.
-   let trimmedBuffer = integerBuffer.replacingOccurrences(of: "_", with: "")
-   // Tries to convert the literal to an integer. If this fails, something is
-   // wrong with the lexing process.
-   guard let integerValue = Int(trimmedBuffer, radix: radix) else {
-   fatalError("Lexer Error: Was not able to convert `String`(" +
-   integerBuffer + ") to `Int`.\n")
-   }
-
-   return .integer(integerValue)
-   }
-
-   /// A convenience method used in `forIntegers` and `forFloatingPoints`.
-   ///
-   /// Indicates whether a given number will be negative or not.
-   ///
-   /// - Precondition: `buffer` holds the current relevant character.
-   /// - Postcondition: `buffer` is still the same, or holds the first character
-   /// after the sign-symbol, if a number will be constructable.
-   ///
-   /// - Returns: An optional `Bool` that is `true` if the number is negative,
-   /// `false` if it is not, and `nil` if no number will be constructable from
-   /// the given character sequence.
-   private static func numberIsNegative(buffer: inout Character, lexer: Lexer<Token>) -> Bool? {
-   let numberIsNegative = buffer == "-"
-   let testBuffer = numberIsNegative ? lexer.nextCharacter(peek: true) : buffer
-
-   guard testBuffer.isPart(of: .decimalDigits) else { return nil }
-   if numberIsNegative { buffer = lexer.nextCharacter() }
-
-   return numberIsNegative
-   }
-}
-*/

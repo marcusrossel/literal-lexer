@@ -10,14 +10,12 @@
 		DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */; };
 		DD7835971D8009E600B6B21C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD621D7076C6005B1A98 /* Token.swift */; };
 		DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */; };
-		DD7835991D8013CB00B6B21C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD78358F1D8006BC00B6B21C /* LiteralLexerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteralLexerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteralLexerTests.swift; sourceTree = "<group>"; };
 		DD7835931D8006BC00B6B21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Generic Lexer.swift"; sourceTree = "<group>"; };
 		DDD1BD621D7076C6005B1A98 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -55,7 +53,6 @@
 			children = (
 				DDD1BD671D7076CF005B1A98 /* Generic Lexer */,
 				DDD1BD621D7076C6005B1A98 /* Token.swift */,
-				DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */,
 			);
 			path = "Literal Lexer";
 			sourceTree = "<group>";
@@ -150,7 +147,6 @@
 				DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */,
 				DD7835971D8009E600B6B21C /* Token.swift in Sources */,
 				DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */,
-				DD7835991D8013CB00B6B21C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +282,7 @@
 				DD7835951D8006BC00B6B21C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
