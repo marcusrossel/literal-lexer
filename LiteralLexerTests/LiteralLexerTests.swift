@@ -9,7 +9,6 @@
 import XCTest
 
 class LiteralLexerTests: XCTestCase {
-
   let literalLexer = Lexer<Token>(
     defaultTransform: { (buffer, _) in .undefined(buffer) },
     tokenTransforms: [
@@ -113,6 +112,7 @@ class LiteralLexerTests: XCTestCase {
     XCTAssertEqual(allTokens(in: "-0b125"), [.integer(-1), .integer(25)])
     XCTAssertEqual(allTokens(in: "0o125"), [.integer(85)])
     XCTAssertEqual(allTokens(in: "0x125"), [.integer(293)])
+    XCTAssertEqual(allTokens(in: "0xaB_cD"), [.integer(43981)])
     XCTAssertEqual(allTokens(in: "-0o123"), [.integer(-83)])
     XCTAssertEqual(
       allTokens(in: "0o911"),
@@ -185,5 +185,23 @@ class LiteralLexerTests: XCTestCase {
       allTokens(in: "-123.3 -flaggyFlag"),
       [.floatingPoint(-123.3), .flag("flaggyFlag")]
     )
+  }
+
+  func testAllTokens() {
+    let text = "\"id\" -a1 '$' -1_000.1 + 0x0FF_12A /*.*/ true \n// blegh"
+    let tokens: [Token] = [
+      Token.uninterpolatedString("id"),
+      Token.flag("a1"),
+      .character("$"),
+      .floatingPoint(-1000.1),
+      .undefined("+"),
+      .integer(0xFF12A),
+      Token.comment("."),
+      .boolean(true),
+      .newLine,
+      Token.comment(" blegh")
+    ]
+
+    XCTAssertEqual(allTokens(in: text), tokens)
   }
 }
