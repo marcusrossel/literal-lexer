@@ -7,34 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DDD1BD631D7076C6005B1A98 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */; };
-		DDD1BD641D7076C6005B1A98 /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */; };
-		DDD1BD651D7076C6005B1A98 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD611D7076C6005B1A98 /* main.swift */; };
-		DDD1BD661D7076C6005B1A98 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD621D7076C6005B1A98 /* Token.swift */; };
+		DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */; };
+		DD7835971D8009E600B6B21C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD621D7076C6005B1A98 /* Token.swift */; };
+		DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */; };
+		DD7835991D8013CB00B6B21C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		DD54B49C1D7073E30030013E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		DD54B49E1D7073E30030013E /* Literal Lexer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Literal Lexer"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD78358F1D8006BC00B6B21C /* LiteralLexerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteralLexerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteralLexerTests.swift; sourceTree = "<group>"; };
+		DD7835931D8006BC00B6B21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Generic Lexer.swift"; sourceTree = "<group>"; };
-		DDD1BD611D7076C6005B1A98 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DDD1BD621D7076C6005B1A98 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		DD54B49B1D7073E30030013E /* Frameworks */ = {
+		DD78358C1D8006BC00B6B21C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -48,6 +37,7 @@
 			isa = PBXGroup;
 			children = (
 				DD54B4A01D7073E30030013E /* Literal Lexer */,
+				DD7835901D8006BC00B6B21C /* LiteralLexerTests */,
 				DD54B49F1D7073E30030013E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,7 +45,7 @@
 		DD54B49F1D7073E30030013E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DD54B49E1D7073E30030013E /* Literal Lexer */,
+				DD78358F1D8006BC00B6B21C /* LiteralLexerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,11 +54,19 @@
 			isa = PBXGroup;
 			children = (
 				DDD1BD671D7076CF005B1A98 /* Generic Lexer */,
-				DDD1BD611D7076C6005B1A98 /* main.swift */,
 				DDD1BD621D7076C6005B1A98 /* Token.swift */,
 				DDD1BD5F1D7076C6005B1A98 /* Extensions.swift */,
 			);
 			path = "Literal Lexer";
+			sourceTree = "<group>";
+		};
+		DD7835901D8006BC00B6B21C /* LiteralLexerTests */ = {
+			isa = PBXGroup;
+			children = (
+				DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */,
+				DD7835931D8006BC00B6B21C /* Info.plist */,
+			);
+			path = LiteralLexerTests;
 			sourceTree = "<group>";
 		};
 		DDD1BD671D7076CF005B1A98 /* Generic Lexer */ = {
@@ -82,22 +80,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DD54B49D1D7073E30030013E /* Literal Lexer */ = {
+		DD78358E1D8006BC00B6B21C /* LiteralLexerTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DD54B4A51D7073E30030013E /* Build configuration list for PBXNativeTarget "Literal Lexer" */;
+			buildConfigurationList = DD7835961D8006BC00B6B21C /* Build configuration list for PBXNativeTarget "LiteralLexerTests" */;
 			buildPhases = (
-				DD54B49A1D7073E30030013E /* Sources */,
-				DD54B49B1D7073E30030013E /* Frameworks */,
-				DD54B49C1D7073E30030013E /* CopyFiles */,
+				DD78358B1D8006BC00B6B21C /* Sources */,
+				DD78358C1D8006BC00B6B21C /* Frameworks */,
+				DD78358D1D8006BC00B6B21C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Literal Lexer";
-			productName = "Literal Lexer";
-			productReference = DD54B49E1D7073E30030013E /* Literal Lexer */;
-			productType = "com.apple.product-type.tool";
+			name = LiteralLexerTests;
+			productName = LiteralLexerTests;
+			productReference = DD78358F1D8006BC00B6B21C /* LiteralLexerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -109,11 +107,10 @@
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Marcus Rossel";
 				TargetAttributes = {
-					DD54B49D1D7073E30030013E = {
+					DD78358E1D8006BC00B6B21C = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8YSJ38HAEZ;
 						DevelopmentTeamName = "Marcus Rossel (Personal Team)";
-						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -130,20 +127,30 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DD54B49D1D7073E30030013E /* Literal Lexer */,
+				DD78358E1D8006BC00B6B21C /* LiteralLexerTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		DD78358D1D8006BC00B6B21C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		DD54B49A1D7073E30030013E /* Sources */ = {
+		DD78358B1D8006BC00B6B21C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDD1BD631D7076C6005B1A98 /* Extensions.swift in Sources */,
-				DDD1BD641D7076C6005B1A98 /* Generic Lexer.swift in Sources */,
-				DDD1BD651D7076C6005B1A98 /* main.swift in Sources */,
-				DDD1BD661D7076C6005B1A98 /* Token.swift in Sources */,
+				DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */,
+				DD7835971D8009E600B6B21C /* Token.swift in Sources */,
+				DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */,
+				DD7835991D8013CB00B6B21C /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,23 +241,28 @@
 			};
 			name = Release;
 		};
-		DD54B4A61D7073E30030013E /* Debug */ = {
+		DD7835941D8006BC00B6B21C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LiteralLexerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.LiteralLexerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		DD54B4A71D7073E30030013E /* Release */ = {
+		DD7835951D8006BC00B6B21C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LiteralLexerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcusrossel.LiteralLexerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -267,14 +279,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DD54B4A51D7073E30030013E /* Build configuration list for PBXNativeTarget "Literal Lexer" */ = {
+		DD7835961D8006BC00B6B21C /* Build configuration list for PBXNativeTarget "LiteralLexerTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DD54B4A61D7073E30030013E /* Debug */,
-				DD54B4A71D7073E30030013E /* Release */,
+				DD7835941D8006BC00B6B21C /* Debug */,
+				DD7835951D8006BC00B6B21C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

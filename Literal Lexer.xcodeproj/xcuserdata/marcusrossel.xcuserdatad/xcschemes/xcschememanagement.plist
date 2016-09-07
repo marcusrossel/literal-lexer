@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>LiteralLexerTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>DD54B49D1D7073E30030013E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD78358E1D8006BC00B6B21C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
