@@ -34,17 +34,17 @@ enum Token {
 extension Token: Equatable {
   static func ==(lhs: Token, rhs: Token) -> Bool {
     switch (lhs, rhs) {
-    case (.endOfFile, .endOfFile): return true
-    case (.newLine, .newLine): return true
-    case let (.comment(left), .comment(right)): return left == right
-    case let (.boolean(left), .boolean(right)): return left == right
-    case let (.integer(left), .integer(right)): return left == right
-    case let (.floatingPoint(left), .floatingPoint(right)): return left == right
-    case let (.character(left), .character(right)): return left == right
-    case let (.uninterpolatedString(left), .uninterpolatedString(right)): return left == right
-    case let (.flag(left), .flag(right)): return left == right
-    case let (.undefined(left), .undefined(right)): return left == right
-    default: return false
+    case (.endOfFile, .endOfFile):                                 return true
+    case (.newLine, .newLine):                                     return true
+    case let (.comment(l), .comment(r)):                           return l == r
+    case let (.boolean(l), .boolean(r)):                           return l == r
+    case let (.integer(l), .integer(r)):                           return l == r
+    case let (.floatingPoint(l), .floatingPoint(r)):               return l == r
+    case let (.character(l), .character(r)):                       return l == r
+    case let (.uninterpolatedString(l), .uninterpolatedString(r)): return l == r
+    case let (.flag(l), .flag(r)):                                 return l == r
+    case let (.undefined(l), .undefined(r)):                       return l == r
+    default:                                                       return false
     }
   }
 }
@@ -61,7 +61,8 @@ enum TokenTransform {
   /// Detects and ignores consecutive whitespaces.
   ///
   /// - Returns: `nil`
-  static func forWhitespaces(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forWhitespaces(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     while buffer.isPart(of: .whitespaces) {
       buffer = lexer.nextCharacter()
     }
@@ -72,7 +73,8 @@ enum TokenTransform {
   ///
   /// - Returns: `.endOfLine` if the respective character was detected,
   /// otherwise `nil`.
-  static func forEndOfFile(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forEndOfFile(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     guard buffer == lexer.endOfFile else { return nil }
 
     buffer = lexer.nextCharacter()
@@ -83,7 +85,8 @@ enum TokenTransform {
   ///
   /// - Returns: `.newLine` if the respective character was detected,
   /// otherwise `nil`.
-  static func forNewLines(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forNewLines(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     guard buffer.isPart(of: .newlines) else { return nil }
 
     buffer = lexer.nextCharacter()
@@ -97,7 +100,8 @@ enum TokenTransform {
   ///
   /// - Returns: A `.whitespace` token if a comment was detected, otherwise
   /// `nil`.
-  static func forComments(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forComments(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     guard buffer == "/" else { return nil }
 
     var commentBuffer = ""
@@ -112,7 +116,8 @@ enum TokenTransform {
         commentBuffer.append(buffer)
         buffer = lexer.nextCharacter()
       }
-    } /* Handles closed comments. */ else if lexer.nextCharacter(peek: true) == "*" {
+    } /* Handles closed comments. */
+    else if lexer.nextCharacter(peek: true) == "*" {
       // Sets `buffer` to the first character after the `*`.
       buffer = lexer.nextCharacter(stride: 2)
 
@@ -139,7 +144,8 @@ enum TokenTransform {
   ///
   /// - Returns: A `.boolean` token if a boolean literal was detected, otherwise
   /// `nil`.
-  static func forBooleans(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forBooleans(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     for booleanLiteral in ["true", "false"] {
       var booleanBuffer = "\(buffer)"
 
@@ -173,7 +179,8 @@ enum TokenTransform {
   /// - Returns: An `.integer` token if an integer literal was detected, a 
   /// `.floatingPoint` token if a floating-point token was detected, otherwise
   /// `nil`.
-  static func forNumbers(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forNumbers(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     // Determines if the number is negative, and if the first character after
     // the sign-character even qualifies for a number.
     let numberIsNegative = buffer == "-"
@@ -283,7 +290,8 @@ enum TokenTransform {
   ///
   /// - Returns: A `.character` token if a character literal was detected,
   /// otherwise `nil`.
-  static func forCharacters(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forCharacters(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     guard buffer == "'" else { return nil }
     buffer = lexer.nextCharacter()
 
@@ -307,7 +315,10 @@ enum TokenTransform {
   ///
   /// - Returns: An `.uninterpolatedString` token if such a string literal was
   /// detected, otherwise `nil`.
-  static func forUninterpolatedStrings(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forUninterpolatedStrings(
+    _ buffer: inout Character,
+    _ lexer: Lexer<Token>
+  ) -> Token? {
     guard buffer == "\"" else { return nil }
     buffer = lexer.nextCharacter()
 
@@ -333,9 +344,12 @@ enum TokenTransform {
   ///
   /// - Returns: A `.flag` token if a flag literal was detected, otherwise
   /// `nil`.
-  static func forFlags(_ buffer: inout Character, _ lexer: Lexer<Token>) -> Token? {
+  static func forFlags(_ buffer: inout Character, _ lexer: Lexer<Token>)
+  -> Token? {
     guard buffer == "-" else { return nil }
-    guard lexer.nextCharacter(peek: true).isPart(of: .letters) else { return nil }
+    guard lexer.nextCharacter(peek: true).isPart(of: .letters) else {
+      return nil
+    }
     buffer = lexer.nextCharacter()
 
     var flagBuffer = ""
