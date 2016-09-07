@@ -64,8 +64,8 @@ class LiteralLexerTests: XCTestCase {
       [.undefined("a"), Token.comment("abc\n/ ")]
     )
     XCTAssertEqual(
-      allTokens(in: " a/*Hello world.**/\nb"),
-      [.undefined("a"), Token.comment("Hello world.*"), .newLine, .undefined("b")]
+      allTokens(in: " a/*Hi world.**/\nb"),
+      [.undefined("a"), Token.comment("Hi world.*"), .newLine, .undefined("b")]
     )
     XCTAssertEqual(
       allTokens(in: "/**//*a*/"),
@@ -164,11 +164,17 @@ class LiteralLexerTests: XCTestCase {
     XCTAssertEqual(allTokens(in: "\"123\""), [.uninterpolatedString("123")])
     XCTAssertEqual(
       allTokens(in: "a\"hi, world.\"b"),
-      [Token.undefined("a"), .uninterpolatedString("hi, world."), Token.undefined("b")]
+      [Token.undefined("a"),
+       .uninterpolatedString("hi, world."),
+       Token.undefined("b")
+      ]
     )
     XCTAssertEqual(
       allTokens(in: "\"\"_\"\""),
-      [.uninterpolatedString(""), Token.undefined("_"), .uninterpolatedString("")]
+      [.uninterpolatedString(""),
+       Token.undefined("_"),
+       .uninterpolatedString("")
+      ]
     )
   }
 
@@ -178,8 +184,8 @@ class LiteralLexerTests: XCTestCase {
     XCTAssertEqual(allTokens(in: " -f"), [.flag("f")])
     XCTAssertEqual(allTokens(in: "-f"), [.flag("f")])
     XCTAssertEqual(allTokens(in: "-flag"), [.flag("flag")])
-    XCTAssertEqual(allTokens(in: "a-flag"), [Token.undefined("a"), .flag("flag")])
-    XCTAssertEqual(allTokens(in: "-flag a"), [.flag("flag"), Token.undefined("a")])
+    XCTAssertEqual(allTokens(in: "a-fla"), [Token.undefined("a"), .flag("fla")])
+    XCTAssertEqual(allTokens(in: "-fl a"), [.flag("fl"), Token.undefined("a")])
     XCTAssertEqual(allTokens(in: "-numer1cFl4g"), [.flag("numer1cFl4g")])
     XCTAssertEqual(
       allTokens(in: "-123.3 -flaggyFlag"),
