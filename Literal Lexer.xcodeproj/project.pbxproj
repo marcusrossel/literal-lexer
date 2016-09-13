@@ -9,14 +9,14 @@
 /* Begin PBXBuildFile section */
 		DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */; };
 		DD7835971D8009E600B6B21C /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD621D7076C6005B1A98 /* Token.swift */; };
-		DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */; };
+		DD8EA4A91D88947A00D35B1B /* Lexer Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8EA4A81D88947A00D35B1B /* Lexer Frame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD78358F1D8006BC00B6B21C /* LiteralLexerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiteralLexerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD7835911D8006BC00B6B21C /* LiteralLexerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiteralLexerTests.swift; sourceTree = "<group>"; };
 		DD7835931D8006BC00B6B21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Generic Lexer.swift"; sourceTree = "<group>"; };
+		DD8EA4A81D88947A00D35B1B /* Lexer Frame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Lexer Frame.swift"; sourceTree = "<group>"; };
 		DDD1BD621D7076C6005B1A98 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,7 +51,7 @@
 		DD54B4A01D7073E30030013E /* Literal Lexer */ = {
 			isa = PBXGroup;
 			children = (
-				DDD1BD671D7076CF005B1A98 /* Generic Lexer */,
+				DD8EA4A81D88947A00D35B1B /* Lexer Frame.swift */,
 				DDD1BD621D7076C6005B1A98 /* Token.swift */,
 			);
 			path = "Literal Lexer";
@@ -64,14 +64,6 @@
 				DD7835931D8006BC00B6B21C /* Info.plist */,
 			);
 			path = LiteralLexerTests;
-			sourceTree = "<group>";
-		};
-		DDD1BD671D7076CF005B1A98 /* Generic Lexer */ = {
-			isa = PBXGroup;
-			children = (
-				DDD1BD601D7076C6005B1A98 /* Generic Lexer.swift */,
-			);
-			name = "Generic Lexer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,9 +136,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD8EA4A91D88947A00D35B1B /* Lexer Frame.swift in Sources */,
 				DD7835921D8006BC00B6B21C /* LiteralLexerTests.swift in Sources */,
 				DD7835971D8009E600B6B21C /* Token.swift in Sources */,
-				DD7835981D80138400B6B21C /* Generic Lexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

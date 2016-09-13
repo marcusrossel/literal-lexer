@@ -1,6 +1,6 @@
 //
-//  Generic Lexer.swift
-//  GenericLexer
+//  Lexer Frame.swift
+//  Lexer Frame
 //
 //  Created by Marcus Rossel on 26.08.16.
 //  Copyright © 2016 Marcus Rossel. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A non-consuming, generic, configurable lexer.
+/// A non-consuming, generic, configurable lexer frame.
 public final class Lexer<Token> {
   /// The character that signifies that the end of `text` is reached.
   ///
