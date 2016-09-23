@@ -1,6 +1,6 @@
 //
-//  LiteralLexerTests.swift
-//  LiteralLexerTests
+//  LiteralLexer Tests.swift
+//  LiteralLexer Tests
 //
 //  Created by Marcus Rossel on 07.09.16.
 //  Copyright © 2016 Marcus Rossel. All rights reserved.
@@ -48,10 +48,12 @@ class LiteralLexerTests: XCTestCase {
   func testComments() {
     XCTAssertEqual(
       allTokens(in: "a//abc\n/ "),
+      // Explicit `Token.` is needed to resolve ambiguity.
       [.undefined("a"), Token.comment("abc\n/ ")]
     )
     XCTAssertEqual(
       allTokens(in: " a/*Hi world.**/\nb"),
+      // Explicit `Token.` is needed to resolve ambiguity.
       [.undefined("a"), Token.comment("Hi world.*"), .newLine, .undefined("b")]
     )
     XCTAssertEqual(
@@ -151,13 +153,15 @@ class LiteralLexerTests: XCTestCase {
     XCTAssertEqual(allTokens(in: "\"123\""), [.uninterpolatedString("123")])
     XCTAssertEqual(
       allTokens(in: "a\"hi, world.\"b"),
-      [Token.undefined("a"),
-       .uninterpolatedString("hi, world."),
-       Token.undefined("b")
+      // Explicit `Token.` is needed to resolve ambiguity.
+      [.undefined("a"),
+       Token.uninterpolatedString("hi, world."),
+       .undefined("b")
       ]
     )
     XCTAssertEqual(
       allTokens(in: "\"\"_\"\""),
+      // Explicit `Token.` is needed to resolve ambiguity.
       [.uninterpolatedString(""),
        Token.undefined("_"),
        .uninterpolatedString("")
@@ -171,8 +175,10 @@ class LiteralLexerTests: XCTestCase {
     XCTAssertEqual(allTokens(in: " -f"), [.flag("f")])
     XCTAssertEqual(allTokens(in: "-f"), [.flag("f")])
     XCTAssertEqual(allTokens(in: "-flag"), [.flag("flag")])
+    // Explicit `Token.` is needed to resolve ambiguity.
     XCTAssertEqual(allTokens(in: "a-fla"), [Token.undefined("a"), .flag("fla")])
-    XCTAssertEqual(allTokens(in: "-fl a"), [.flag("fl"), Token.undefined("a")])
+    // Explicit `Token.` is needed to resolve ambiguity.
+    XCTAssertEqual(allTokens(in: "-fl a"), [Token.flag("fl"), .undefined("a")])
     XCTAssertEqual(allTokens(in: "-numer1cFl4g"), [.flag("numer1cFl4g")])
     XCTAssertEqual(
       allTokens(in: "-123.3 -flaggyFlag"),
@@ -182,12 +188,13 @@ class LiteralLexerTests: XCTestCase {
 
   func testAllTokens() {
     let text = "\"id\" -a1 '$' -1_000.1 + 0x0FF_12A /*.*/ true \n// blegh"
+    // Explicit `Token.` is needed to resolve compiler errors.
     let tokens: [Token] = [
-      Token.uninterpolatedString("id"),
+      .uninterpolatedString("id"),
       Token.flag("a1"),
-      .character("$"),
+      Token.character("$"),
       .floatingPoint(-1000.1),
-      .undefined("+"),
+      Token.undefined("+"),
       .integer(0xFF12A),
       Token.comment("."),
       .boolean(true),
