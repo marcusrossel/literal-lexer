@@ -240,21 +240,6 @@ enum TokenTransform {
       validCharacters.contains(String(buffer)) || 
       (!literalMustBeInteger && isValidDecimalPoint(buffer))
 
-    /* FASTER VARIANT
-    if literalMustBeInteger {
-      repeat {
-        numberBuffer.append(buffer)
-        buffer = lexer.nextCharacter()
-      } while validCharacters.contains(String(buffer))
-    } else {
-      repeat {
-        numberBuffer.append(buffer)
-        buffer = lexer.nextCharacter()
-      } while validCharacters.contains(String(buffer)) ||
-        isValidDecimalPoint(buffer)
-    }
-    */
-
     let token: Token
 
     // Removes the `_` characters, because otherwise the number-from-string
