@@ -9,20 +9,7 @@
 import XCTest
 
 class LiteralLexerTests: XCTestCase {
-  let literalLexer = Lexer<Token>(
-    defaultTransform: { (buffer, _) in .undefined(buffer) },
-    tokenTransforms: [
-      TokenTransform.forWhitespaces,
-      TokenTransform.forEndOfFile,
-      TokenTransform.forNewLines,
-      TokenTransform.forComments,
-      TokenTransform.forBooleans,
-      TokenTransform.forNumbers,
-      TokenTransform.forCharacters,
-      TokenTransform.forUninterpolatedStrings,
-      TokenTransform.forFlags,
-    ]
-  )
+  let literalLexer = LiteralLexer()
 
   private func allTokens(in string: String) -> [Token] {
     literalLexer.text = string
