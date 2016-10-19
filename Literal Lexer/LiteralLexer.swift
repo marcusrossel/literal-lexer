@@ -8,17 +8,20 @@
 
 import Foundation
 
-final class LiteralLexer: LexerProtocol {
+/// A typealias needed to avoid circular referencing.
+typealias LiteralLexerToken = Token
+
+final class LiteralLexer : LexerProtocol {
+  typealias Token = LiteralLexerToken
+
   var text = ""
   var position = 0
-  var endOfFile: Character = "\0"
+  var endOfText: Character = "\0"
 
-  var defaultTransform: (inout Character, LiteralLexer) -> Token = {
-    buffer, _ in .undefined(buffer)
-  }
+  var defaultTransform = TokenTransform.default
   var tokenTransforms = [
     TokenTransform.forWhitespaces,
-    TokenTransform.forEndOfFile,
+    TokenTransform.forEndOfText,
     TokenTransform.forNewLines,
     TokenTransform.forComments,
     TokenTransform.forBooleans,

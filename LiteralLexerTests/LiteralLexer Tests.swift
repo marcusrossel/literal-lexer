@@ -9,7 +9,7 @@
 import XCTest
 
 class LiteralLexerTests: XCTestCase {
-  let literalLexer = LiteralLexer()
+  var literalLexer = LiteralLexer()
 
   private func allTokens(in string: String) -> [Token] {
     literalLexer.text = string
@@ -18,7 +18,7 @@ class LiteralLexerTests: XCTestCase {
 
     while true {
       let token = literalLexer.nextToken()
-      guard token != .endOfFile else { break }
+      guard token != .endOfText else { break }
       tokens.append(token)
     }
 
